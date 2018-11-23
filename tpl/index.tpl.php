@@ -66,6 +66,7 @@
 						<input type="hidden" name="status" value="<?php echo $current_payment->status; ?>"/>
 						<input type="hidden" name="tva" value="<?php echo $current_payment->tva; ?>"/>
 						<input type="hidden" name="provision" value="<?php echo $current_payment->provision; ?>"/>
+						<input type="hidden" name="color" value="<?php echo $current_payment->color; ?>"/>
 						<input type="hidden" name="fk_categcomptable" value="<?php echo $current_payment->fk_categcomptable; ?>"/>
 				</div>
 				<div class="clear nopad"></div>
