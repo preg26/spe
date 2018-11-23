@@ -1,0 +1,269 @@
+html,body {
+	background:#fff;
+}
+.clear {
+	clear:both;
+}
+.nopad {
+	padding:0 !important;
+}
+
+.ml010 {
+	margin-left:-10px;
+}
+
+.mt50 {
+	margin-top:50px !important;
+}
+
+.pt15 {
+	padding-top:15px !important;
+}
+
+.backgrey, .null {
+	background:#888888 !important;
+	color:#fff !important;
+}
+.backgreen, .positif {
+	background:#c6efce !important;
+	color:#006100 !important;
+}
+.backgreenlight {
+	background:#88DD88 !important;
+}
+.backred, .negatif {
+	background:#ffc7ce !important;
+	color:#9c0006 !important;
+}
+.colorred {
+	color:#ff003d !important;
+}
+
+.bloc-grey {
+	padding:5px;
+	background:#888;
+	text-decoration:none;
+	color:#fff;
+	margin:0 5px;
+}
+
+a.bloc-grey.active, a.bloc-grey:hover {
+	background:#333;
+	text-decoration:none;
+	color:#fff;
+}
+
+.glyphicon-refresh {
+	font-size:0.8em;
+}
+
+h4 {
+	font-variant:small-caps;
+	font-style: italic;
+}
+
+h6 {
+	margin:0;
+}
+
+label {
+	margin-top:3px;
+	margin-bottom:0;
+}
+
+.full-input input, .full-input textarea {
+	width:100%;
+}
+
+.modal-header {
+	background:#333;
+	color:#fff;
+}
+
+.modal-dialog {
+	width:700px;
+}
+
+#page-sidebar {
+	background:#f8f8f8;
+	min-height:100%;
+}
+#page-sidebar li.active a {
+	background:#333;
+}
+#page-sidebar li a, #page-sidebar li .badge {
+	color:#555;
+}
+#page-sidebar li.active a, #page-sidebar li.active .badge {
+	color:#fff;
+}
+#event-list .titleday {
+	vertical-align: top;
+	border:5px solid #fff;
+	padding:5px;
+	text-transform: uppercase;
+	background:#333;
+	color:#fff;
+}
+#event-list .day {
+	vertical-align: top;
+	background:#dedede;
+	border:5px solid #fff;
+	border-radius:10px;
+	padding-bottom:25px !important;
+	min-height:150px;
+	z-index:1;
+}
+#event-list .day.current {
+	background:#dede99;
+}
+
+#event-list .day div {
+	padding:5px;
+	z-index:10;
+}
+
+#event-list .day .ui-sortable-placeholder {
+	height:30px;
+	background:#333;
+	border-color:#888;
+}
+
+#event-list .day .title {
+	text-align:center;
+	background:#333;
+	color:#fff;
+}
+#event-list .day .amount {
+	font-weight: bold;
+	background:#bcbcbc;
+}
+#event-list .day .amountmonth {
+	font-weight: bold;
+	margin-bottom:25px;
+	border-bottom:1px solid #bcbcbc;
+}
+
+#event-list .day.weekend {
+}
+
+input[name="status"] {
+	margin-left:3px;
+}
+.select2-container {
+	min-width:200px !important;
+	max-width:100%;
+}
+
+.ui-widget {
+	margin-bottom:5px;
+}
+
+.event {
+	cursor:pointer;
+	background:#cecece;
+	margin-bottom:5px;
+	border-radius:5px;
+	border-left:8px solid #ccc;
+	border-right:8px solid #ccc;
+}
+
+.event.validate {
+	color:#007700;
+}
+
+/* Connexion */
+.form-signin {
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+}
+
+/* Tresorerie */
+
+
+#table-tresorerie {
+	font-size:12px;
+}
+#table-tresorerie .sous-compte, #table-tresorerie  div {
+    padding:0;
+}
+
+#table-tresorerie .cell {
+    border-right:1px solid #ccc;
+    padding:8px 5px;
+    text-align:right;
+}
+
+#table-tresorerie .entete.cell {
+    font-weight:bold;
+    text-align:center;
+    border-bottom:1px solid #ccc;
+}
+
+#table-tresorerie .compte {
+    text-align:left;
+}
+
+#table-tresorerie .parentCateg {
+    background:#ccc;
+}
+
+#table-tresorerie .plafond {
+    color:#269abc;
+}
+#table-tresorerie .fontred {
+    color:#ff003d !important;
+}
+#table-tresorerie .payment {
+    display:none;
+}
+#table-tresorerie .backpositif {
+    background:#29B000;
+    color:#fff !important;
+}
+#table-tresorerie .backnegatif {
+    background:#B02300;
+    color:#fff !important;
+}
+#table-tresorerie .backExceptionnel {
+	background:#00ABF4;
+    color:#fff !important;
+}
+#table-tresorerie .backGreylight {
+	background:#eee;
+}
+#table-tresorerie .backpositif .cell {
+	border-color:#29B000;
+}
+#table-tresorerie .backExceptionnel .cell {
+	border-color:#00ABF4;
+}
+#table-tresorerie .backnegatif .cell {
+	border-color:#B02300;
+}
+#table-tresorerie .backGreylight .cell {
+	border-color:#eee;
+}
+#table-tresorerie .empty .cell {
+	border:none;
+}
+#table-tresorerie .percent, #table-tresorerie .reste {
+	color:#888;
+}
+#table-tresorerie .sous-compte[reel]:not([reel='']) {
+	cursor:pointer;
+}
+
+@media (min-width: 990px) {
+	#waiting-payments {
+		display:none;
+	}
+}
+
+@media print {
+	
+	#table-tresorerie .payment {
+	    display:block;
+	}
+}

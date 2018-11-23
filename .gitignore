@@ -1,0 +1,6 @@
+scripts/
+.buildpath
+.project
+.projects
+spdo.class.php
+class/spdo.class.php
