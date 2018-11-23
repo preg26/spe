@@ -106,7 +106,7 @@ class Payment extends CommonObject
 	public function fetch($id) {
 		$res = parent::fetch($id);
 		if(!empty($this->tva)) $this->tva_tx = $this->tva/1000;
-		if(!empty($this->color)) {
+		if(!empty($this->color) && strlen($this->color) == 7) {
 		    $split = str_split(substr($this->color,1), 2);
 		    $this->r = hexdec($split[0]);
 		    $this->g = hexdec($split[1]);

@@ -48,7 +48,7 @@
 				</div>
 				<div class="mt15"></div>
 				<?php foreach($TWaitingPayments as $current_payment): ?>
-			<div class="event">
+			<div class="event" style="border-color: <?php echo $current_payment->color; ?>">
 				<div class="col-md-8 nopad">
 					<h6><?php echo $current_payment->show(); ?></h6>
 					<input type="hidden" name="current_date" value="">
@@ -261,7 +261,7 @@
 						<label for="edit-color">Couleur du règlement</label>
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="color" id="edit-color" class="color-input" data-huebee='{ "hues": 8, "shades":3, "saturations": 1}' value="" />
+						<input type="text" name="color" id="edit-color" class="color-input" autocomplete="off" data-huebee='{ "hues": 8, "shades":3, "saturations": 1}' value="" />
 					</div>
 					<div class="row" style="padding:10px">&nbsp;</div>
 					<div class="col-md-3">
@@ -377,7 +377,7 @@
 						<label for="color">Couleur du règlement</label>
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="color" id="color" class="color-input" data-huebee='{ "hues": 8, "shades":3, "saturations": 1}' value="" />
+						<input type="text" name="color" id="color" class="color-input" autocomplete="off" data-huebee='{ "hues": 8, "shades":3, "saturations": 1}' value="" />
 					</div>
 					<div class="row" style="padding:5px">&nbsp;</div>
 					<div class="col-md-3">

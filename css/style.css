@@ -255,12 +255,6 @@ input[name="status"] {
 	cursor:pointer;
 }
 
-@media (min-width: 990px) {
-	#waiting-payments {
-		display:none;
-	}
-}
-
 @media print {
 	
 	#table-tresorerie .payment {
