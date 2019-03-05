@@ -31,7 +31,7 @@ $TComptes = $compte->fetchAll();
 $compta = new ComptaCateg($PDOdb);
 $TCompta = $compta->fetchAll();
 $payment = new Payment($PDOdb);
-$TWaitingPayments = $payment->fetchForBank($id, 1);
+$TWaitingPayments = $payment->fetchForBank(null, 1);
 $TPayments = $payment->fetchForBank($id);
 $TAmount = Account::calcul_totaux($compte, $TPayments);
 

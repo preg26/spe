@@ -50,34 +50,37 @@ class Payment extends CommonObject
 	var $g;
 	var $b;
 
-	public function fetchForBank($fk_bank,$waiting=false,$status=null){
+	public function fetchForBank($fk_bank=null,$waiting=false,$status=null){
 		$ret = array();
+		$sql = "SELECT rowid";
+		$sql .= " FROM " . MAIN_DB_PREFIX . $this->table_element;
+		$sql .= " WHERE 1=1";
+		
+		// All payments for all banks case
 		if(!empty($fk_bank)) {
-			$sql = "SELECT rowid";
-			$sql .= " FROM " . MAIN_DB_PREFIX . $this->table_element;
-			$sql .= ' WHERE fk_bank = ' . $fk_bank;
-			if (!empty($status)) {
-				$sql .= ' AND status = '.$status;
-			}
-			if($waiting) {
-				$sql .= ' AND datep = \'1970-01-01\'';
-			} else {
-				$sql .= ' AND datep > \'1970-01-01 \'';
-			}
+		     $sql .= ' AND fk_bank = ' . $fk_bank;
+		}
+		if (!empty($status)) {
+			$sql .= ' AND status = '.$status;
+		}
+		if($waiting) {
+			$sql .= ' AND datep = \'1970-01-01\'';
+		} else {
+			$sql .= ' AND datep > \'1970-01-01 \'';
+		}
 
-			$req = $this->PDOdb->query($sql);
-			while ($res = $req->fetch(PDO::FETCH_OBJ)) {
-				$payment = new self($this->PDOdb);
-				$payment->fetch($res->rowid);
-				if (!$waiting) {
-					$time = strtotime($payment->datep);
-					$dateD = date('d',$time);
-					$dateM = date('m',$time);
-					$dateY = date('Y',$time);
-					$ret[$dateY][$dateM][$dateD][] = $payment;
-				}else{
-					$ret[] = $payment;
-				}
+		$req = $this->PDOdb->query($sql);
+		while ($res = $req->fetch(PDO::FETCH_OBJ)) {
+			$payment = new self($this->PDOdb);
+			$payment->fetch($res->rowid);
+			if (!$waiting) {
+				$time = strtotime($payment->datep);
+				$dateD = date('d',$time);
+				$dateM = date('m',$time);
+				$dateY = date('Y',$time);
+				$ret[$dateY][$dateM][$dateD][] = $payment;
+			}else{
+				$ret[] = $payment;
 			}
 		}
 		return $ret;
@@ -91,7 +94,7 @@ class Payment extends CommonObject
 		return $this->amount - $this->getHt();
 	}
 
-	public function move($date = null) {
+	public function move($date = null, $bank = null) {
 		if(!empty($date)) {
 			// Scheduled case
 			$realdate = strtotime($date);
@@ -99,6 +102,9 @@ class Payment extends CommonObject
 		} else {
 			// Waiting case
 			$this->datep = '1970-01-01';
+		}
+		if(!empty($bank)) {
+		    $this->fk_bank = $bank;
 		}
 		return $this->update();
 	}

@@ -21,7 +21,7 @@ $(document).ready(function(){
     		$.ajax({
 				url: "interface.php"
 				, method: "GET"
-				, data: { action:'move', rowid: rowid, new_date: new_date }
+				, data: { action:'move', rowid: rowid, new_date: new_date, bank: id }
 			}).done(function() {
 				$(object).find('input[name="datep"]').val(new_date);
 				$(location).attr('href','?id=' + id + '&year=' + year + '&posy=' + y);
