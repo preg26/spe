@@ -140,13 +140,9 @@
 									?>
 									
 						<div class="event<?php if($current_payment->status > 0) echo ' validate'; ?>" style="border-color: <?php echo $current_payment->color; ?>">
-							<div class="col-md-6 nopad">
+							<div class="col-md-12">
 								<h6><?php echo $current_payment->show(); ?></h6>
 							</div>
-							<div class="col-md-6 nopad text-right">
-								<span class="badge <?php if($current_payment->amount > 0) echo 'backgreen'; elseif($current_payment->amount == 0) echo ' backgrey';  else echo 'backred'; ?>">
-									<?php echo view_price($current_payment->amount); ?>
-								</span>
 								<input type="hidden" name="label" value="<?php echo $current_payment->label; ?>"/>
 								<input type="hidden" name="date_facture" value="<?php echo $current_payment->date_facture; ?>"/>
 								<input type="hidden" name="amount" value="<?php echo $current_payment->amount; ?>"/>
@@ -158,6 +154,10 @@
 								<input type="hidden" name="tva" value="<?php echo $current_payment->tva; ?>"/>
 								<input type="hidden" name="provision" value="<?php echo $current_payment->provision; ?>"/>
 								<input type="hidden" name="fk_categcomptable" value="<?php echo $current_payment->fk_categcomptable; ?>"/>
+							<div class="amount nopad text-right">
+								<span class="badge <?php if($current_payment->amount > 0) echo 'backgreen'; elseif($current_payment->amount == 0) echo ' backgrey';  else echo 'backred'; ?>">
+									<?php echo view_price($current_payment->amount); ?>
+								</span>
 							</div>
 							<div class="clear nopad"></div>
 						</div>
