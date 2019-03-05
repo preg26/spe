@@ -4,6 +4,16 @@ Version 2.1 - mai 2017
 L'objectif de cette web-app est d'apporter dans une vue très simple et fonctionnele un contrôle quotidien sur ses règlements / recettes.
 
 #############################
+V2.2
+#############################
+
+# Gestion des règlements en attente sur n'importe quelle banque
+N'importe quel règlement en attente de positionnement peut être mis sur n'importe quelle calendrier de n'importe quelle banque.
+
+# Corrections graphiques diverses
+Un scroll a été ajouté dans les paiements en attentes. Une refonte visuelle légère a été appliquée pour une meilleure lecture des paiements et de leur montant 
+
+#############################
 V2.1
 #############################
 
