@@ -134,17 +134,22 @@ label {
 	background:#333;
 	color:#fff;
 }
-#event-list .day .amount {
+#event-list .day > .amount {
 	font-weight: bold;
 	background:#bcbcbc;
 }
-#event-list .day .amountmonth {
+#event-list .day > .amountmonth {
 	font-weight: bold;
 	margin-bottom:25px;
 	border-bottom:1px solid #bcbcbc;
 }
 
 #event-list .day.weekend {
+}
+
+#waiting-payments .days {
+	overflow-y:scroll;
+	padding:0 0 0 5px !important;
 }
 
 input[name="status"] {
@@ -160,12 +165,19 @@ input[name="status"] {
 }
 
 .event {
+	position:relative;
 	cursor:pointer;
 	background:#cecece;
 	margin-bottom:5px;
 	border-radius:5px;
 	border-left:8px solid #ccc;
 	border-right:8px solid #ccc;
+}
+
+.event .amount {
+	position:absolute;
+	top:2px;
+	right:2px;
 }
 
 .event.validate {

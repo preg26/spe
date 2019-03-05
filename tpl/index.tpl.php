@@ -28,6 +28,7 @@
 	
 	<div class="col-md-10 pt15" id="event-list">
 	<?php
+        // Case of bank selected (100% case in user case)
 		if(!empty($id)) {
 	?>
 		<input type="hidden" id="compteid" value="<?php echo $id; ?>" />
@@ -47,32 +48,34 @@
 					<span class="glyphicon glyphicon-time"></span> Paiements en attentes
 				</div>
 				<div class="mt15"></div>
+				<div class="days">
 				<?php foreach($TWaitingPayments as $current_payment): ?>
-			<div class="event" style="border-color: <?php echo $current_payment->color; ?>">
-				<div class="col-md-8 nopad">
-					<h6><?php echo $current_payment->show(); ?></h6>
-					<input type="hidden" name="current_date" value="">
-				</div>
-				<div class="col-md-4 nopad text-right">
-					<span class="badge <?php if($current_payment->amount > 0) echo 'backgreen'; elseif($current_payment->amount == 0) echo ' backgrey'; else echo 'backred'; ?>">
-						<?php echo view_price($current_payment->amount); ?>
-					</span>
-						<input type="hidden" name="label" value="<?php echo $current_payment->label; ?>"/>
-						<input type="hidden" name="date_facture" value="<?php echo $current_payment->date_facture; ?>"/>
-						<input type="hidden" name="amount" value="<?php echo $current_payment->amount; ?>"/>
-						<input type="hidden" name="rowid" value="<?php echo $current_payment->rowid; ?>"/>
-						<input type="hidden" name="datep" value=""/>
-						<input type="hidden" name="mode" value="<?php echo $current_payment->mode; ?>"/>
-						<input type="hidden" name="status" value="<?php echo $current_payment->status; ?>"/>
-						<input type="hidden" name="tva" value="<?php echo $current_payment->tva; ?>"/>
-						<input type="hidden" name="provision" value="<?php echo $current_payment->provision; ?>"/>
-						<input type="hidden" name="color" value="<?php echo $current_payment->color; ?>"/>
-						<input type="hidden" name="fk_categcomptable" value="<?php echo $current_payment->fk_categcomptable; ?>"/>
-				</div>
-				<div class="clear nopad"></div>
-			</div>
+        			<div class="event" style="border-color: <?php echo $current_payment->color; ?>">
+        				<div class="col-md-12">
+        					<h6><?php echo $current_payment->show(); ?></h6>
+        					<input type="hidden" name="current_date" value="">
+    						<input type="hidden" name="label" value="<?php echo $current_payment->label; ?>"/>
+    						<input type="hidden" name="date_facture" value="<?php echo $current_payment->date_facture; ?>"/>
+    						<input type="hidden" name="amount" value="<?php echo $current_payment->amount; ?>"/>
+    						<input type="hidden" name="rowid" value="<?php echo $current_payment->rowid; ?>"/>
+    						<input type="hidden" name="datep" value=""/>
+    						<input type="hidden" name="mode" value="<?php echo $current_payment->mode; ?>"/>
+    						<input type="hidden" name="status" value="<?php echo $current_payment->status; ?>"/>
+    						<input type="hidden" name="tva" value="<?php echo $current_payment->tva; ?>"/>
+    						<input type="hidden" name="provision" value="<?php echo $current_payment->provision; ?>"/>
+    						<input type="hidden" name="color" value="<?php echo $current_payment->color; ?>"/>
+    						<input type="hidden" name="fk_categcomptable" value="<?php echo $current_payment->fk_categcomptable; ?>"/>
+        				</div>
+        				<div class="amount nopad text-right">
+        					<span class="badge <?php if($current_payment->amount > 0) echo 'backgreen'; elseif($current_payment->amount == 0) echo ' backgrey'; else echo 'backred'; ?>">
+        						<?php echo view_price($current_payment->amount); ?>
+        					</span>
+        				</div>
+        				<div class="clear nopad"></div>
+        			</div>
 				<?php endforeach; ?>
-				<div class="clear"></div>
+					<div class="clear"></div>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-10 nopad">

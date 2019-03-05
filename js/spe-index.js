@@ -134,8 +134,13 @@ $(document).ready(function(){
 	    minimumResultsForSearch:4
     });
     
+    // Waiting-payments heigh
+    // Move change waiting payments position
     $(function() {
     	function movewaiting($sidebar, $window, offset, topPadding) {
+    	    var wH = $window.height();
+    	    $('#waiting-payments .days').height(wH - 100);
+    	    console.log(wH);
             if ($window.scrollTop() > offset.top - 50) {
                 $sidebar.stop().animate({
                     marginTop: $window.scrollTop() - offset.top + topPadding
@@ -149,7 +154,7 @@ $(document).ready(function(){
         var $sidebar   = $("#waiting-payments"), 
             $window    = $(window),
             offset     = $sidebar.offset(),
-            topPadding = 50;
+            topPadding = $('.navbar-fixed-top').height();
 
         $window.scroll(function() {
         	movewaiting($sidebar, $window, offset, topPadding);

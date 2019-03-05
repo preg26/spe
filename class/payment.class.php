@@ -155,7 +155,7 @@ class Payment extends CommonObject
 		$ret = '';
 		if((empty($this->date_facture) || $this->date_facture == '1970-01-01') || $this->fk_categcomptable == 0) 
 			$ret = '<span class="glyphicon glyphicon-warning-sign colorred"></span> ';
-		$ret .= $this->getMode().' - '.$this->label;
+		$ret .= $this->getMode().' <br />'.$this->label;
 		return $ret;
 	}
 	
