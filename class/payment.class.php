@@ -44,6 +44,7 @@ class Payment extends CommonObject
 	var $tva_tx;
 	var $fk_bank;
 	var $fk_categcomptable;
+	var $categcomptable;
 	var $status;
 	var $provision;
 	var $r;
@@ -123,6 +124,11 @@ class Payment extends CommonObject
 		    $this->g = hexdec($split[1]);
 		    $this->b = hexdec($split[2]);
 		}
+		if(!empty($this->fk_categcomptable)) {
+		    $categcomptable = new ComptaCateg($this->PDOdb);
+		    $categcomptable->fetch($this->fk_categcomptable);
+		    $this->categcomptable = $categcomptable;
+		}
 		return $res;
 	}
 	
@@ -164,10 +170,19 @@ class Payment extends CommonObject
 	
 	public function show() {
 		$ret = '';
-		if((empty($this->date_facture) || $this->date_facture == '1970-01-01') || $this->fk_categcomptable == 0) 
+		if((empty($this->date_facture) || $this->date_facture == '1970-01-01') || $this->fk_categcomptable == 0) {
 			$ret = '<span class="glyphicon glyphicon-warning-sign colorred"></span> ';
-		$ret .= $this->getMode().' <br />'.$this->label;
-		$ret .= '<br /><b>'.$this->date_facture.'</b>';
+		}
+		$ret .= $this->getMode();
+		$ret .= '<br />'.$this->label;
+		if(!empty($this->date_facture) && $this->date_facture != '1970-01-01') {
+		    $ret .= '<br /><b><u>Date :</u> '.$this->date_facture.'</b>';
+		}else {
+		    $ret .= '<br /><b><span class="glyphicon glyphicon-warning-sign colorred"></span> Aucune date</b>';
+		}
+		if(!empty($this->categcomptable)) {
+		    $ret .= '<br /><br/><u>Compte :</u> '.$this->categcomptable->label;
+		}
 		return $ret;
 	}
 	
