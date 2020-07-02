@@ -10,21 +10,26 @@ $(document).ready(function(){
     	, items: "div.event"
     	, placeholder: "ui-state-highlight"
     	, revert : true
-    	, zIndex: 9999
+    	, zIndex: 10000
+    	, helper: 'clone'
+    	, appendTo: 'body'
     	, stop:function( event, ui ) {
     		var object = ui.item.context;
     		var rowid = $(object).find('input[name="rowid"]').val();
     		var new_date = $(object).parent().find('input[name="current_date"]').val();
-        	var y = window.pageYOffset;
+        	var posy = window.pageYOffset;
+        	var sort = $('#sort-payments').val();
     		var id = $('#compteid').val();
     		var year = $('#yearid').val();
     		$.ajax({
 				url: "interface.php"
 				, method: "GET"
-				, data: { action:'move', rowid: rowid, new_date: new_date, bank: id }
-			}).done(function() {
+				, data: { action:'move', rowid: rowid, new_date: new_date, bank: id, posy: posy }
+			}).done(function(data) {
 				$(object).find('input[name="datep"]').val(new_date);
-				$(location).attr('href','?id=' + id + '&year=' + year + '&posy=' + y);
+				// Refresh page or not next action
+				$(location).attr('href','?id=' + id + '&year=' + year + '&posy=' + posy + '&sort=' + sort);
+				// TODO refresh calendar head if move
 			});
     	}
 	});
@@ -84,6 +89,10 @@ $(document).ready(function(){
 
     // New action trigger
     $('#event-list').on('click','.day', function(e) {
+    	// don't show in links
+    	if(this.is('a')) return false;
+    	
+    	// show modal
     	var y = window.pageYOffset;
         $('#newModal').modal();
         $('#newModal #nmode0').prop('checked', true);
@@ -100,7 +109,7 @@ $(document).ready(function(){
         $("#newModal input.special-ui").checkboxradio( "destroy" );
         $("#newModal input.special-ui").checkboxradio({
             icon: false
-        });
+        });     
     });
 
     // SET FOCUS bootstrap 3

@@ -50,7 +50,7 @@ class Payment extends CommonObject
 	var $g;
 	var $b;
 
-	public function fetchForBank($fk_bank=null,$waiting=false,$status=null){
+	public function fetchForBank($fk_bank=null,$waiting=false,$status=null,$sort=null){
 		$ret = array();
 		$sql = "SELECT rowid";
 		$sql .= " FROM " . MAIN_DB_PREFIX . $this->table_element;
@@ -67,6 +67,11 @@ class Payment extends CommonObject
 			$sql .= ' AND datep = \'1970-01-01\'';
 		} else {
 			$sql .= ' AND datep > \'1970-01-01 \'';
+		}
+		if(!empty($sort)) {
+		    $order = 'ASC';
+		    if ($sort == 'color') $order = 'DESC';
+		    $sql .= ' ORDER BY '.$sort.' '.$order;
 		}
 
 		$req = $this->PDOdb->query($sql);
@@ -162,6 +167,7 @@ class Payment extends CommonObject
 		if((empty($this->date_facture) || $this->date_facture == '1970-01-01') || $this->fk_categcomptable == 0) 
 			$ret = '<span class="glyphicon glyphicon-warning-sign colorred"></span> ';
 		$ret .= $this->getMode().' <br />'.$this->label;
+		$ret .= '<br /><b>'.$this->date_facture.'</b>';
 		return $ret;
 	}
 	

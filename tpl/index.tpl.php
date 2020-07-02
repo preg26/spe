@@ -1,5 +1,6 @@
-<input type="hidden" id="posy" value="<?php echo $posy; ?>" />
-<div class="container-full mt50">
+<div class="container-full mt50" id="content">
+	<input type="hidden" id="posy" value="<?php echo $posy; ?>" />
+	<input type="hidden" id="sort-payments" value="<?php echo $sort; ?>" />
 	<div class="navbar-left col-md-2 pt15" id="page-sidebar">
 		<h4>Mes comptes</h4>
 		<ul class="nav nav-pills nav-stacked">
@@ -47,7 +48,16 @@
 				<div class="title">
 					<span class="glyphicon glyphicon-time"></span> Paiements en attentes
 				</div>
-				<div class="mt15"></div>
+    			<div class="reorder text-center">
+    				<span class="float-left">
+        				<a class="<?php if($sort == 'date_facture')echo ' active'; ?>" href="?id=<?php echo $id; ?>&year=<?php echo $year; ?>&posy=<?php echo $posy; ?>">Date</a>
+        				&nbsp;&nbsp;
+    				</span>
+    				<span class="float-right">
+        				&nbsp;&nbsp;
+        				<a class="<?php if($sort == 'color')echo ' active'; ?>" href="?id=<?php echo $id; ?>&year=<?php echo $year; ?>&posy=<?php echo $posy; ?>&sort=color">Couleur</a>
+    				</span>
+    			</div>
 				<div class="days">
 				<?php foreach($TWaitingPayments as $current_payment): ?>
         			<div class="event" style="border-color: <?php echo $current_payment->color; ?>">

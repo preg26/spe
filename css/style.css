@@ -124,7 +124,7 @@ label {
 }
 
 #event-list .day .ui-sortable-placeholder {
-	height:30px;
+	height:60px;
 	background:#333;
 	border-color:#888;
 }
@@ -146,7 +146,13 @@ label {
 
 #event-list .day.weekend {
 }
-
+#waiting-payments .reorder a {
+	color:#333;
+}
+#waiting-payments .reorder a.active {
+	font-weight:bold;
+	text-decoration: underline;
+}
 #waiting-payments .days {
 	overflow-y:scroll;
 	padding:0 0 0 5px !important;

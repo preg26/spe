@@ -5,6 +5,7 @@
 	$rowid = GETPOST('rowid');
 	$date = GETPOST('new_date');
 	$bank = GETPOST('bank');
+	$posy = GETPOST('posy');
 	
 	$payment = new Payment($PDOdb);
     $payment->fetch($rowid);

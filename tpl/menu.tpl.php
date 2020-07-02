@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="navigation">
 	<div class="container-full">
 		<div class="navbar-header">
 		  <a class="navbar-brand nopad" href="#"><img alt="logo" src="img/logo.png" height="50px"></a>

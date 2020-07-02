@@ -17,12 +17,16 @@ $action = GETPOST('action');
 $id = GETPOST('id');
 $year = (int) GETPOST('year');
 $posy = GETPOST('posy');
+$sort = GETPOST('sort');
 
 if (empty($id)) {
 	$id = 1;
 }
 if (empty($year)) {
-	$year = date("Y", time());
+    $year = date("Y", time());
+}
+if (empty($sort)) {
+    $sort = "date_facture";
 }
 
 $compte = new Account($PDOdb);
@@ -31,7 +35,7 @@ $TComptes = $compte->fetchAll();
 $compta = new ComptaCateg($PDOdb);
 $TCompta = $compta->fetchAll();
 $payment = new Payment($PDOdb);
-$TWaitingPayments = $payment->fetchForBank(null, 1);
+$TWaitingPayments = $payment->fetchForBank(null, 1, null, $sort);
 $TPayments = $payment->fetchForBank($id);
 $TAmount = Account::calcul_totaux($compte, $TPayments);
 
