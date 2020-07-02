@@ -1,7 +1,17 @@
 # SPE web-app gestion des règlements et recettes
-Version 2.1 - mai 2017
-
+Version 3.0 - Juillet 2020
 L'objectif de cette web-app est d'apporter dans une vue très simple et fonctionnele un contrôle quotidien sur ses règlements / recettes.
+
+
+#############################
+V3.0
+#############################
+# Changement visuel
+Sur les règlements, nous pouvons désormais voir l'intitulé du compte comptable et sa date de facture
+
+#Nouveauté de tri
+Les règlements en attentes sont désormais filtrés par défaut selon la date de facture
+Nous pouvons choisir de les ordonner par couleur
 
 #############################
 V2.2
