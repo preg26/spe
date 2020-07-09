@@ -237,7 +237,7 @@
 						<input type="text" name="label" value="" />
 					</div>
 					<div class="col-md-3">
-						<label for="client">Client</label>
+						<label for="client">Sté Groupe</label>
 					</div>
 					<div class="col-md-9">
 						<input type="text" name="client" value="" />
@@ -360,7 +360,7 @@
 						<input type="text" name="label" value="" />
 					</div>
 					<div class="col-md-3">
-						<label for="client">Client</label>
+						<label for="client">Sté Groupe</label>
 					</div>
 					<div class="col-md-9">
 						<input type="text" name="client" value="" />

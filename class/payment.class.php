@@ -183,7 +183,7 @@ class Payment extends CommonObject
 		    $ret .= '<br /><b><span class="glyphicon glyphicon-warning-sign colorred"></span> Aucune date</b>';
 		}
 		if(!empty($this->client)) {
-		    $ret .= '<br /><br/><u>Client:</u> '.$this->client;
+		    $ret .= '<br /><br/><u>Sté Groupe:</u> '.$this->client;
 		}
 		return $ret;
 	}
