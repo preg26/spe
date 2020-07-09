@@ -90,7 +90,8 @@ $(document).ready(function(){
     // New action trigger
     $('#event-list').on('click','.day', function(e) {
     	// don't show in links
-    	if(this.is('a')) return false;
+    	var target = $( event.target );
+        if(target.is('a')) return true;
     	
     	// show modal
     	var y = window.pageYOffset;
