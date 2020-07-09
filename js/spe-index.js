@@ -47,6 +47,7 @@ $(document).ready(function(){
         var provision = $(this).find('input[name="provision"]').val();
         var tva = $(this).find('input[name="tva"]').val();
         var label = $(this).find('input[name="label"]').val();
+        var client = $(this).find('input[name="client"]').val();
         var color = $(this).find('input[name="color"]').val();
         var amount = $(this).find('input[name="amount"]').val();
         var date_facture = $(this).find('input[name="date_facture"]').val();
@@ -59,6 +60,7 @@ $(document).ready(function(){
         $('#editModal input[name="rowid"]').val(rowid);
         $('#editModal input[name="posy"]').val(y);
         $('#editModal input[name="label"]').val(label);
+        $('#editModal input[name="client"]').val(client);
         $('#editModal input[name="amount"]').val(amount);
         $('#editModal input[name="datep"]').val(datep);
         $('#editModal input[name="color"]').val(color);

@@ -8,33 +8,35 @@ class Payment extends CommonObject
 	public $element='payment';
 	public $table_element='payment';
 	public $TChamps = array(
-			'rowid'=>'number'
-			,'label'=>'string'
-	        ,'color'=>'string'
-			,'datep'=>'date'
-			,'date_facture'=>'date'
-			,'mode'=>'number'
-			,'tva'=>'number'
-			,'provision'=>'number'
-			,'amount'=>'float'
-			,'fk_bank'=>'number'
-			,'fk_categcomptable'=>'number'
-			,'status'=>'number'
+	    'rowid'=>'number'
+	    ,'label'=>'string'
+	    ,'client'=>'string'
+        ,'color'=>'string'
+		,'datep'=>'date'
+		,'date_facture'=>'date'
+		,'mode'=>'number'
+		,'tva'=>'number'
+		,'provision'=>'number'
+		,'amount'=>'float'
+		,'fk_bank'=>'number'
+		,'fk_categcomptable'=>'number'
+		,'status'=>'number'
 	);
 	public $TTypeTrad = array(
-			'0'=>'Prélèvement'
-			,'1'=>'Virement Sepa'
-			,'2'=>'Espèce'
-			,'3'=>'Chèque'
+		'0'=>'Prélèvement'
+		,'1'=>'Virement Sepa'
+		,'2'=>'Espèce'
+		,'3'=>'Chèque'
 	);
 	public $TType = array(
-			'0'=>'Prlv'
-			,'1'=>'Vir'
-			,'2'=>'Esp'
-			,'3'=>'Chq'
+		'0'=>'Prlv'
+		,'1'=>'Vir'
+		,'2'=>'Esp'
+		,'3'=>'Chq'
 	);
 	
 	var $label;
+	var $client;
 	var $datep;
 	var $date_facture;
 	var $amount;
@@ -176,12 +178,12 @@ class Payment extends CommonObject
 		$ret .= $this->getMode();
 		$ret .= '<br />'.$this->label;
 		if(!empty($this->date_facture) && $this->date_facture != '1970-01-01') {
-		    $ret .= '<br /><b><u>Date :</u> '.$this->date_facture.'</b>';
+		    $ret .= '<br /><b><u>Date:</u> '.$this->date_facture.'</b>';
 		}else {
 		    $ret .= '<br /><b><span class="glyphicon glyphicon-warning-sign colorred"></span> Aucune date</b>';
 		}
-		if(!empty($this->categcomptable)) {
-		    $ret .= '<br /><br/><u>Compte :</u> '.$this->categcomptable->label;
+		if(!empty($this->client)) {
+		    $ret .= '<br /><br/><u>Client:</u> '.$this->client;
 		}
 		return $ret;
 	}

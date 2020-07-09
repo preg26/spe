@@ -65,6 +65,7 @@
         					<h6><?php echo $current_payment->show(); ?></h6>
         					<input type="hidden" name="current_date" value="">
     						<input type="hidden" name="label" value="<?php echo $current_payment->label; ?>"/>
+							<input type="hidden" name="client" value="<?php echo $current_payment->client; ?>"/>
     						<input type="hidden" name="date_facture" value="<?php echo $current_payment->date_facture; ?>"/>
     						<input type="hidden" name="amount" value="<?php echo $current_payment->amount; ?>"/>
     						<input type="hidden" name="rowid" value="<?php echo $current_payment->rowid; ?>"/>
@@ -154,6 +155,7 @@
 								<h6><?php echo $current_payment->show(); ?></h6>
 							</div>
 								<input type="hidden" name="label" value="<?php echo $current_payment->label; ?>"/>
+								<input type="hidden" name="client" value="<?php echo $current_payment->client; ?>"/>
 								<input type="hidden" name="date_facture" value="<?php echo $current_payment->date_facture; ?>"/>
 								<input type="hidden" name="amount" value="<?php echo $current_payment->amount; ?>"/>
 								<input type="hidden" name="rowid" value="<?php echo $current_payment->rowid; ?>"/>
@@ -235,6 +237,12 @@
 						<input type="text" name="label" value="" />
 					</div>
 					<div class="col-md-3">
+						<label for="client">Client</label>
+					</div>
+					<div class="col-md-9">
+						<input type="text" name="client" value="" />
+					</div>
+					<div class="col-md-3">
 						<label for="amount">Montant</label>
 					</div>
 					<div class="col-md-9">
@@ -278,6 +286,7 @@
 						<input type="text" name="color" id="edit-color" class="color-input" autocomplete="off" data-huebee='{ "hues": 8, "shades":3, "saturations": 1}' value="" />
 					</div>
 					<div class="row" style="padding:10px">&nbsp;</div>
+					<?php if (!empty($global->conf->USE_COMPTA)): ?>
 					<div class="col-md-3">
 						<label for="fk_categcomptable_edit">Catégorie comptable</label>
 					</div>
@@ -298,6 +307,7 @@
 						?>
 						</select>
 					</div>
+					<?php endif; ?>
 					<div class="clear"></div>
 				</div>
 				<div class="modal-footer">
@@ -350,6 +360,12 @@
 						<input type="text" name="label" value="" />
 					</div>
 					<div class="col-md-3">
+						<label for="client">Client</label>
+					</div>
+					<div class="col-md-9">
+						<input type="text" name="client" value="" />
+					</div>
+					<div class="col-md-3">
 						<label for="amount">Montant</label>
 					</div>
 					<div class="col-md-9">
@@ -394,6 +410,7 @@
 						<input type="text" name="color" id="color" class="color-input" autocomplete="off" data-huebee='{ "hues": 8, "shades":3, "saturations": 1}' value="" />
 					</div>
 					<div class="row" style="padding:5px">&nbsp;</div>
+					<?php if (!empty($global->conf->USE_COMPTA)): ?>
 					<div class="col-md-3">
 						<label for="fk_categcomptable_new">Catégorie comptable</label>
 					</div>
@@ -414,6 +431,7 @@
 						?>
 						</select>
 					</div>
+					<?php endif; ?>
 					<div class="clear"></div>
 				</div>
 				<div class="modal-footer">

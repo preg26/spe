@@ -8,6 +8,11 @@
 	define('TRESO_CH1_CATEG_ID', 6);
 	define('TRESO_CH2_CATEG_ID', 7);
 	
+	// Globals confs
+	$global = new stdClass();
+	$global->conf = new stdClass();
+	$global->conf->USE_COMPTA = 0;
+	
 	// BDD et formatage utf8
 	$PDOdb = SPDO::getInstance();
 	$PDOdb->query("SET NAMES utf8");
