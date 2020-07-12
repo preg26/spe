@@ -1,5 +1,11 @@
 $(document).ready(function(){
 	
+	// function hide and show waiting stats
+	$('body').on('click', '#toggleWaitingStats, #backWaiting', function() {
+		$('#waiting-stats').toggle(0);
+		$('#waiting-payments-data').toggle(0);
+	});
+	
 	//$('#edit-color').paletteColorPicker();
 	// You can use something like...
 	// $('[data-palette]').paletteColorPicker();
@@ -91,8 +97,9 @@ $(document).ready(function(){
 
     // New action trigger
     $('#event-list').on('click','.day', function(e) {
+    	
     	// don't show in links
-    	var target = $( event.target );
+    	var target = $( e.target );
         if(target.is('a')) return true;
     	
     	// show modal

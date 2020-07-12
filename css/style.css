@@ -146,6 +146,10 @@ label {
 
 #event-list .day.weekend {
 }
+
+#waiting-stats {
+	display:none;
+}
 #waiting-payments .reorder a {
 	color:#333;
 }

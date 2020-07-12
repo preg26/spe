@@ -172,7 +172,7 @@ class Payment extends CommonObject
 	
 	public function show() {
 		$ret = '';
-		if((empty($this->date_facture) || $this->date_facture == '1970-01-01') || $this->fk_categcomptable == 0) {
+		if((empty($this->date_facture) || $this->date_facture == '1970-01-01') || ((!empty($conf->global->USE_COMPTA)) && $this->fk_categcomptable == 0)) {
 			$ret = '<span class="glyphicon glyphicon-warning-sign colorred"></span> ';
 		}
 		$ret .= $this->getMode();
@@ -216,5 +216,26 @@ class Payment extends CommonObject
 		if(empty($this->fk_categcomptable))
 			$this->fk_categcomptable = 0;
 		return parent::save();
+	}
+	
+	// Return array stats of waiting payments
+	public static function getWaitingStats($TWaitingPayments = array()){
+	    $TRes = array();
+	    $total = 0;
+	    $TColor = array();
+	    if(!empty($TWaitingPayments)) {
+	        foreach($TWaitingPayments as $p) {
+	            $total += $p->amount;
+	            if(!empty($TColor[$p->color])) {
+	                $TColor[$p->color] += $p->amount;
+	            }else{
+	                $TColor[$p->color] = $p->amount;
+	            }
+	        }
+	    }
+	    // affect total and colors array
+	    $TRes['total'] = $total;
+	    $TRes['colors'] = $TColor;
+	    return $TRes;
 	}
 }
