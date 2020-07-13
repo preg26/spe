@@ -4,6 +4,13 @@ $(document).ready(function(){
 	$('body').on('click', '#toggleWaitingStats, #backWaiting', function() {
 		$('#waiting-stats').toggle(0);
 		$('#waiting-payments-data').toggle(0);
+		$('#payments-data .day').toggle(0);
+		$('.stats-payments').toggle(0);
+		if($('#waiting-stats').css('display') == 'none') {
+			changeposeY();
+		}else {
+			changeposeY(1);
+		}
 	});
 	
 	//$('#edit-color').paletteColorPicker();
@@ -153,23 +160,41 @@ $(document).ready(function(){
 	    minimumResultsForSearch:4
     });
     
+    function changeposeY(forcepos) {
+    	
+	    // Change posY if already pass by param
+    	if(forcepos > 0) {
+    		posy = forcepos;
+    	}else{
+    		posy = $('#posy').val();
+    	}
+	    
+	    if(posy > 0) {
+	    	// Go to current position
+	    	$(document).scrollTop(posy);
+	    }else{
+	    	// Go to current day
+	    	$(document).scrollTop($('.day.current').position().top);
+	    }
+    }
+    
+	function movewaiting($sidebar, $window, offset, topPadding) {
+	    var wH = $window.height();
+	    $('#waiting-payments .days').height(wH - 100);
+        if ($window.scrollTop() > offset.top - 50) {
+            $sidebar.stop().animate({
+                marginTop: $window.scrollTop() - offset.top + topPadding
+            },0);
+        } else {
+            $sidebar.stop().animate({
+                marginTop: 0
+            },0);
+        }
+	}
+    
     // Waiting-payments heigh
     // Move change waiting payments position
     $(function() {
-    	function movewaiting($sidebar, $window, offset, topPadding) {
-    	    var wH = $window.height();
-    	    $('#waiting-payments .days').height(wH - 100);
-    	    console.log(wH);
-            if ($window.scrollTop() > offset.top - 50) {
-                $sidebar.stop().animate({
-                    marginTop: $window.scrollTop() - offset.top + topPadding
-                },0);
-            } else {
-                $sidebar.stop().animate({
-                    marginTop: 0
-                },0);
-            }
-    	}
         var $sidebar   = $("#waiting-payments"), 
             $window    = $(window),
             offset     = $sidebar.offset(),
@@ -181,17 +206,8 @@ $(document).ready(function(){
         
         // First start (if view already down with posY)
     	movewaiting($sidebar, $window, offset, topPadding);
+
+        changeposeY();
         
     });
-    
-    
-    // Change posY if already pass by param
-    posy = $('#posy').val();
-    if(posy > 0) {
-    	// Go to current position
-    	$(document).scrollTop(posy);
-    }else{
-    	// Go to current day
-    	$(document).scrollTop($('.day.current').position().top);
-    }
 });

@@ -37,6 +37,7 @@ class Payment extends CommonObject
 	
 	var $label;
 	var $client;
+	var $color;
 	var $datep;
 	var $date_facture;
 	var $amount;

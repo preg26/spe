@@ -111,8 +111,8 @@
         					<?php
         					if(!empty($TStatsWaitingPayments['colors'])) {
         					    ?>
-            					<div class="col-md-12 title">
-            						<span class="">Catégories</span>
+            					<div class="col-md-12 title" style="background-color:#666;">
+            						<span class="">Couleurs</span>
             					</div>
             					<div class="clear mtop5"></div>
         					
@@ -138,7 +138,7 @@
     			
 			</div>
 		</div>
-		<div class="col-md-10 nopad">
+		<div class="col-md-10 nopad" id="payments-data">
 					<?php
 						// Start date
 						$date = strtotime(date($year.'-01-01'));
@@ -150,6 +150,8 @@
 						$restart=true;
 						$total_caisse = $compte->amount_before;
 						
+						$TStats = array('colors','mouvments');
+						
 						while ($date <= $end_date) {
 							$month = (int) date('m',$date);
 							$dateformat = $TDays[$num_day].' '.date('d',$date);
@@ -157,17 +159,28 @@
 							$current_year = date('Y',$date);
 							$current_month = date('m',$date);
 							$current_day = date('d',$date);
+							
+							// Init up and down mouvments
+							if(empty($TStats['mouvments']['up'][$current_month])) {
+							    $TStats['mouvments']['up'][$current_month] = 0;
+							}							
+							if(empty($TStats['mouvments']['down'][$current_month])) {
+							    $TStats['mouvments']['down'][$current_month] = 0;
+							}
+							
 							if(!empty($TAmount[$current_year][$current_month][$current_day])) {
 								$amountday = $TAmount[$current_year][$current_month][$current_day]['current'];
 							}else {
 								$amountday = 0;
 							}
+							
 							$total_caisse += $amountday;
 							
 							// Gestion affichage calendrier
 							if($i==1 || ($restart && $i<7)) {
 								if($restart) {
-									echo '<div class="clear"></div><div class="titleday text-left cold-md-12" colspan=6>'.$TMonths[$month].' '.$year.'</div>';
+								    // debut nouveau mois
+								    echo '<div class="clear"></div><div class="titleday text-left cold-md-12" colspan=6>'.$TMonths[$month].' '.$year.'</div>';
 									for($j=1;$j<$i;$j++) {
 										echo '<div class="col-md-2"></div>';
 									}
@@ -197,6 +210,19 @@
 						 */
 							if(!empty($TPayments[$current_year][$current_month][$current_day])) {
 								foreach($TPayments[$current_year][$current_month][$current_day] as $current_payment) {
+								    
+								    // Init stats month
+								    if(empty($TStats['colors'][$current_month][$current_payment->color])) {
+								        $TStats['colors'][$current_month][$current_payment->color] = 0;
+								    }
+								    
+								    // adding stats payments
+								    $TStats['colors'][$current_month][$current_payment->color] += $current_payment->amount;
+								    if ($current_payment->amount >= 0) {
+								        $TStats['mouvments']['up'][$current_month] += $current_payment->amount;
+								    }else{
+								        $TStats['mouvments']['down'][$current_month] += $current_payment->amount;
+								    }
 									?>
 									
 						<div class="event<?php if($current_payment->status > 0) echo ' validate'; ?>" style="border-color: <?php echo $current_payment->color; ?>">
@@ -224,18 +250,73 @@
 						</div>
 									
 									<?php
-								}
-							}
+								} // end payments foreach
+							} // end payments if
 						?>
 					</div>
 					<?php
 							}
 							$i++;
+							// Fin de mois
 							if(date('Y-m-d',$date) == date('Y-m-t',$date)){
-								for($j=$i;$j<=7;$j++) {
-                                    echo '<div class="col-md-2"></div>';
-								}
-								$restart=true;
+							    $restart=true;
+							    echo '<div class="clear"></div>';
+							    $globalup = 0;
+							    $globaldown = 0;
+							    
+							    if(!empty($TStats['mouvments']['up'][$current_month])) {
+							        $globalup = $TStats['mouvments']['up'][$current_month];
+							    }
+							    if(!empty($TStats['mouvments']['down'][$current_month])) {
+							        $globaldown = $TStats['mouvments']['down'][$current_month];
+							    }
+							    
+								// affichage stats
+								?>
+								<div class="col-md-12 stats-payments">
+    								<div class="col-md-12 nopad" style="margin:5px; background-color:#eee;color:black;">
+    								
+    									<div class="titleday col-md-12" style="border:none;background-color:#666;">
+    										<span class="glyphicon glyphicon-stats"></span> Statistiques du mois
+    									</div>
+    									<div class="col-md-12 mt10 clear"></div>
+    									<div class="col-md-4 text-left">
+    										<strong><span class="glyphicon glyphicon-retweet"></span> 
+    										<?php echo view_price($globalup + $globaldown); ?>
+    										&nbsp;€</strong>
+    									</div>
+    									<div class="col-md-4 text-center">
+    										<span style="color:green"><span class="glyphicon glyphicon-arrow-up"></span> 
+    										<?php echo view_price($globalup); ?>
+    										&nbsp;€</span>
+    									</div>
+    									<div class="col-md-4 text-right">
+    										<span style="color:red"><span class="glyphicon glyphicon-arrow-down"></span> 
+    										<?php echo view_price($globaldown); ?>
+    										&nbsp;€</span>
+    									</div>
+    									<div class="col-md-12 mt10 clear"></div>
+    									<?php 
+    									if(!empty($globaldown) || !empty($globalup)) {
+        									?>
+        									<div class="titleday col-md-12" style="border:none;background-color:#666;">Couleurs</div>
+        									<div class="col-md-12 mt10 clear"></div>
+        									<?php 
+        									if(!empty($TStats['colors'][$current_month])) {
+        									    foreach($TStats['colors'][$current_month] as $keycolor => $mt){
+        									        ?>
+        									<div class="col-md-2">
+        										<div class="col-md-12 event" style="border-color:<?php echo $keycolor; ?>"><?php echo view_price($mt); ?> €</div>
+        									</div>
+        									        <?php
+        									    }
+        									}
+    									} // Fin test si mois vide
+    									?>
+    								</div>
+									<div class="col-md-12 mt10 clear"></div>
+								</div>
+								<?php 
 							}
                             if($i>7) {
                                 echo '<div class="clear"></div>';
@@ -243,7 +324,7 @@
                             }
 							$date = strtotime("+1 day", $date);
 							$num_day = date('N',$date);
-						}
+						} // end dates while
 					?>
 		</div>
 		<?php 
